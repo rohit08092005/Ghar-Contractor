@@ -16,4 +16,5 @@
 
 ## Team
 - **Team Lead:** Shivraj Jadhav
-- **Vice Captain** Manali Desai
+- **Vice Captain:** Manali Desai
+- **Vice Captain:** Sahil Shigwan
