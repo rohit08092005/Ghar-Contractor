@@ -29,20 +29,6 @@ export default function AdminLayout({ children }) {
 
           {/* Right Side */}
           <div className="flex items-center gap-6">
-            {/* Navigation Links */}
-            <Link
-              href="/admin/protected/dashboard"
-              className="text-gray-600 hover:text-orange-600 transition-colors font-medium"
-            >
-              Dashboard
-            </Link>
-            <Link
-              href="/admin/protected/service-request"
-              className="text-gray-600 hover:text-orange-600 transition-colors font-medium"
-            >
-              Service Requests
-            </Link>
-
             {/* Logout Button */}
             <Link
             href="/"
