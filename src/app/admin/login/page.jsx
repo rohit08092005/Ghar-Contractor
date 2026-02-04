@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { loginAdmin } from '@/actions/admin/auth.actions'
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 
-export default function AdminLoginPage() {
+function AdminLoginContent() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -49,7 +49,7 @@ export default function AdminLoginPage() {
     setLoading(true)
 
     const result = await loginAdmin(email, password)
-    
+
     if (result?.error) {
       setError(result.error)
       setLoading(false)
@@ -70,7 +70,6 @@ export default function AdminLoginPage() {
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-50 via-white to-orange-100 px-4">
 
-      {/* Login Card */}
       <Card
         className="relative w-full max-w-xl overflow-hidden
                    border border-orange-100
@@ -79,7 +78,6 @@ export default function AdminLoginPage() {
       >
         <CardHeader className="text-center pb-6 pt-8 relative">
 
-          {/* Back Arrow inside card */}
           <div className="absolute -top-2 left-6">
             <Link href="/">
               <button className="flex items-center gap-1 text-orange-600 hover:text-orange-800 transition text-2xl p-2 rounded-full hover:bg-orange-100">
@@ -88,7 +86,6 @@ export default function AdminLoginPage() {
             </Link>
           </div>
 
-          {/* Logo */}
           <div
             className="mx-auto mb-4 flex h-16 w-16 items-center justify-center
                         rounded-full bg-orange-100 shadow-inner overflow-hidden"
@@ -115,7 +112,7 @@ export default function AdminLoginPage() {
               {error}
             </div>
           )}
-          
+
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -168,10 +165,17 @@ export default function AdminLoginPage() {
         </CardContent>
       </Card>
 
-      {/* Background glow */}
       <div className="absolute inset-0 -z-10 flex justify-center items-center">
         <div className="h-96 w-96 rounded-full bg-orange-300/20 blur-3xl" />
       </div>
     </div>
+  )
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AdminLoginContent />
+    </Suspense>
   )
 }
